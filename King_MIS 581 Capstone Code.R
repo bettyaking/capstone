@@ -376,7 +376,6 @@ summary(logistic_model_MHSA)
 # This means that the odds of an individual being in the homeless group decreases 
 # by 1% holding no variables as explanatory variables.
 
-####----#### I NEED TO KNOW MORE ABOUT LOG REG ####----####
 logistic_model <- glm(formula = HomelessIndicator ~ PrimaryCareShortageArea + 
   MentalHealthShortageArea, family = binomial(), data = train)
 summary(logistic_model)
@@ -394,8 +393,6 @@ summary(logistic_model)
 # MHSA: 0.02615 <-
 1-exp(0.02615)
 #Returns: -0.02649491
-
-####----#### I NEED TO KNOW MORE ABOUT LOG REG ####----####
 
 # Making predictions.
 PCSAprobabilities <- logistic_model_PCSA %>% predict(test, type = "response")
@@ -415,3 +412,5 @@ head(probabilities)
 # Returns:
 # 1         2         3         4         5         6 
 # 0.4968507 0.4968507 0.4968507 0.4968507 0.4968507 0.4968507 
+# These predictions hover around 0.5 and thus are subjectively unimpressive
+# and seemingly unreliable
