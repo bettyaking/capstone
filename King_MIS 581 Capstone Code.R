@@ -42,8 +42,8 @@ ggplot(homeless, aes(homeless$HomelessIndicator)) +
   geom_histogram(aes(fill = homeless$HomelessIndicator), 
     stat = "count", binwidth = 2)
 
-# Determining how many homeless encounters occured in Primary Care Shortage Areas
-# and Mental Health Shortage Areas (PCSA and MHSA respectively).
+# Determining how many homeless encounters occured in Primary Care and Mental Health Shortage Areas.
+library(dplyr)
 PCSA <- filter(homeless, PrimaryCareShortageArea == "Yes"
   & HomelessIndicator == "Homeless")
 str(PCSA)
@@ -256,7 +256,7 @@ sum(nonhomeless.uninsured$Encounters)
 # Pie charts per demographic of the homeless subsets:
 ageslices <- c(6280, 251589, 290589, 109490)
 lbls <- c("0 to 18", "19 to 39", "40 to 59", "60+")
-pie(newslices, labels = lbls, main = "Pie Chart of Homeless Patient Ages")
+pie(ageslices, labels = lbls, main = "Pie Chart of Homeless Patient Ages")
 
 raceslices <- c(3684, 11411, 153156, 148944, 47640, 293809)
 racelbls <- c("American Indian/Alaska Native", "Asian/Pacific Islander", "Black", 
@@ -340,6 +340,8 @@ str(test)
 logistic_model_PCSA <- glm(HomelessIndicator ~ PrimaryCareShortageArea,
   family = binomial(), data=train)
 summary(logistic_model_PCSA)
+# NOTE: Results from the regression model will vary depending on how the data was partitioned
+# per individual user in lines 328-337.
 # Returns statistics that lead to the following conclusions:
 # There is no statistical significance.
 # The equation of this regression is: 
